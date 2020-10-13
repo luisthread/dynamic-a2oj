@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import Home from './components/Home';
+import Ladders from './components/Ladders';
 import problems from './data/problems.json';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -23,7 +23,7 @@ const App = () => {
 	return (
 		<UserProvider>
 			<CssBaseline />
-			<Home />
+			<Ladders />
 		</UserProvider>
 	);
 };
