@@ -1,22 +1,22 @@
 import { Container, Paper, Tab, Tabs } from '@material-ui/core';
-import React, { Fragment, useContext, useState } from 'react';
-import { UserContext } from '../App';
+import React, { Fragment, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 import Ladder from './Ladder';
 
-const TabPanel = ({ children, value, index }) => {
-	return (
-		<div role="tabpanel" hidden={value !== index}>
-			{value === index && <Container maxWidth="sm">{children}</Container>}
-		</div>
-	);
-};
-
 const LadderList = () => {
-	const { solved } = useContext(UserContext);
-	const [ value, setValue ] = useState(0);
+	const { solved, currentTab, setCurrentTab } = useContext(UserContext);
 	const handleValueChange = (event, newValue) => {
-		setValue(newValue);
+		setCurrentTab(newValue);
 	};
+
+	const TabPanel = ({ children, index }) => {
+		return (
+			<div role="tabpanel" hidden={currentTab !== index}>
+				{currentTab === index && <Container maxWidth="sm">{children}</Container>}
+			</div>
+		);
+	};
+
 	return (
 		<Fragment>
 			<Paper square elevation={3}>
@@ -25,7 +25,7 @@ const LadderList = () => {
 					textColor="secondary"
 					variant="scrollable"
 					scrollButtons="auto"
-					value={value}
+					value={currentTab}
 					onChange={handleValueChange}
 				>
 					<Tab label="1300" id={0} />
@@ -50,64 +50,64 @@ const LadderList = () => {
 					<Tab label="2200 extra" id={19} />
 				</Tabs>
 			</Paper>
-			<TabPanel value={value} index={0}>
+			<TabPanel index={0}>
 				<Ladder solved={solved} level="1300" />
 			</TabPanel>
-			<TabPanel value={value} index={1}>
+			<TabPanel index={1}>
 				<Ladder solved={solved} level="1300e" />
 			</TabPanel>
-			<TabPanel value={value} index={2}>
+			<TabPanel index={2}>
 				<Ladder solved={solved} level="1400" />
 			</TabPanel>
-			<TabPanel value={value} index={3}>
+			<TabPanel index={3}>
 				<Ladder solved={solved} level="1400e" />
 			</TabPanel>
-			<TabPanel value={value} index={4}>
+			<TabPanel index={4}>
 				<Ladder solved={solved} level="1500" />
 			</TabPanel>
-			<TabPanel value={value} index={5}>
+			<TabPanel index={5}>
 				<Ladder solved={solved} level="1500e" />
 			</TabPanel>
-			<TabPanel value={value} index={6}>
+			<TabPanel index={6}>
 				<Ladder solved={solved} level="1600" />
 			</TabPanel>
-			<TabPanel value={value} index={7}>
+			<TabPanel index={7}>
 				<Ladder solved={solved} level="1600e" />
 			</TabPanel>
-			<TabPanel value={value} index={8}>
+			<TabPanel index={8}>
 				<Ladder solved={solved} level="1700" />
 			</TabPanel>
-			<TabPanel value={value} index={9}>
+			<TabPanel index={9}>
 				<Ladder solved={solved} level="1700e" />
 			</TabPanel>
-			<TabPanel value={value} index={10}>
+			<TabPanel index={10}>
 				<Ladder solved={solved} level="1800" />
 			</TabPanel>
-			<TabPanel value={value} index={11}>
+			<TabPanel index={11}>
 				<Ladder solved={solved} level="1800e" />
 			</TabPanel>
-			<TabPanel value={value} index={12}>
+			<TabPanel index={12}>
 				<Ladder solved={solved} level="1900" />
 			</TabPanel>
-			<TabPanel value={value} index={13}>
+			<TabPanel index={13}>
 				<Ladder solved={solved} level="1900e" />
 			</TabPanel>
-			<TabPanel value={value} index={14}>
+			<TabPanel index={14}>
 				<Ladder solved={solved} level="2000" />
 			</TabPanel>
-			<TabPanel value={value} index={15}>
+			<TabPanel index={15}>
 				<Ladder solved={solved} level="2000e" />
 			</TabPanel>
-			<TabPanel value={value} index={16}>
+			<TabPanel index={16}>
 				<Ladder solved={solved} level="2100" />
 			</TabPanel>
-			<TabPanel value={value} index={17}>
+			<TabPanel index={17}>
 				<Ladder solved={solved} level="2100e" />
 			</TabPanel>
-			<TabPanel value={value} index={18}>
+			<TabPanel index={18}>
 				<Ladder solved={solved} level="2200" />
 			</TabPanel>
-			<TabPanel value={value} index={19}>
+			<TabPanel index={19}>
 				<Ladder solved={solved} level="2200e" />
 			</TabPanel>
 		</Fragment>

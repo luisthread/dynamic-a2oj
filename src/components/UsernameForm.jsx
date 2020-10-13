@@ -1,10 +1,12 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import { UserContext } from '../App';
 import fetch from 'unfetch';
-import { hashSolvedProblems } from '../utils/Hash';
-import { Avatar, Button, CircularProgress, InputBase, Tooltip } from '@material-ui/core';
-import { makeStyles, fade } from '@material-ui/core/styles';
 import useSWR from 'swr';
+import { Avatar, Button, CircularProgress, InputBase, Snackbar, Tooltip } from '@material-ui/core';
+import { makeStyles, fade } from '@material-ui/core/styles';
+import { UserContext } from '../context/UserContext';
+import { hashSolvedProblems } from '../utils/Hash';
+import { handleChangeUser } from '../utils/ChangeUser';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -13,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	inputInput: {
 		padding: theme.spacing(1),
-		// vertical padding + font size from searchIcon
-
 		transition: theme.transitions.create('width'),
 		width: '20ch',
 		[theme.breakpoints.up('sm')]: {
@@ -42,7 +42,7 @@ const fetchUrl = async (url) => {
 	} catch (error) {
 		return {
 			status: 'FAILED',
-			result: []
+			result: error
 		};
 	}
 };
@@ -61,6 +61,7 @@ const UsernameForm = () => {
 	const [ username, setUsername ] = useState('');
 	const { user, setUser, solved, setSolved } = useContext(UserContext);
 	const [ isLoading, setIsLoading ] = useState(false);
+	const [ openSnackBar, setOpenSnackBar ] = useState(false);
 	const { lastest, isError } = useFetchLastProblem(username);
 
 	useEffect(
@@ -78,6 +79,10 @@ const UsernameForm = () => {
 		const userInfo = await fetchUrl(`https://codeforces.com/api/user.info?handles=${username}`);
 		if (userInfo.status === 'OK') {
 			setUser(userInfo.result[0]);
+		} else {
+			setOpenSnackBar(true);
+			setIsLoading(false);
+			return;
 		}
 
 		const solvedProblems = await fetchUrl(`https://codeforces.com/api/user.status?handle=${username}`);
@@ -86,15 +91,8 @@ const UsernameForm = () => {
 		}
 
 		setSolved(hashSolvedProblems(solved, solvedProblems));
+		setUsername('');
 		setIsLoading(false);
-	};
-	const handleChangeUser = () => {
-		const newSolved = [ ...solved ];
-		newSolved.forEach((sol) => {
-			sol[4] = false;
-		});
-		setSolved([ ...newSolved ]);
-		setUser(null);
 	};
 
 	if (isLoading) {
@@ -103,10 +101,24 @@ const UsernameForm = () => {
 
 	return (
 		<Fragment>
+			<Snackbar
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+				open={openSnackBar}
+				autoHideDuration={3000}
+				onClose={() => setOpenSnackBar(false)}
+			>
+				<Alert onClose={() => setOpenSnackBar(false)} severity="error">
+					User not found
+				</Alert>
+			</Snackbar>
 			{user ? (
 				<Fragment>
 					<Tooltip arrow placement="left" title="Logout">
-						<Button color="inherit" className={classes.btn} onClick={handleChangeUser}>
+						<Button
+							color="inherit"
+							className={classes.btn}
+							onClick={() => handleChangeUser(solved, setSolved, setUser)}
+						>
 							{user.handle}
 						</Button>
 					</Tooltip>
