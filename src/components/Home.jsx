@@ -28,10 +28,10 @@ const Home = () => {
 				Dynamic A2OJ
 			</Typography>
 			<Typography variant="h5" component="h2" gutterBottom>
-				A simple A2OJ ladders app for upsolving ploblems.
+				A simple A2OJ ladder app for upsolving ploblems.
 			</Typography>
 			<Typography variant="h5" component="h2" gutterBottom>
-				Check your progress without any registration.
+				Check your Codeforces progress without any registration.
 			</Typography>
 			<div className={classes.actions}>
 				<Button className={classes.button} variant="contained" startIcon={<GitHubIcon />} href="https://github.com/luisthread/dynamic-a2oj" target="_blank" rel="noopener">
