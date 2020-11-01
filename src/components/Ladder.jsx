@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Ladder = ({ solved, level }) => {
+const Ladder = ({ solved }) => {
 	const classes = useStyles();
 
 	return (
@@ -36,7 +36,7 @@ const Ladder = ({ solved, level }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{solved.filter((s) => s[3] === level).map((s, id) => (
+					{solved.map((s, id) => (
 						<TableRow key={id} className={s[4] ? classes.ac : ''}>
 							<TableCell>{id + 1}</TableCell>
 							<TableCell>

@@ -47,7 +47,7 @@ const fetchUrl = async (url) => {
 	}
 };
 
-function useFetchLastProblem(username) {
+const useFetchLastProblem =(username) => {
 	const { data, error } = useSWR(`https://codeforces.com/api/user.status?handle=${username}&count=5`, fetchUrl);
 
 	return {
@@ -91,7 +91,6 @@ const UsernameForm = () => {
 		}
 
 		setSolved(hashSolvedProblems(solved, solvedProblems));
-		setUsername('');
 		setIsLoading(false);
 	};
 
@@ -117,7 +116,7 @@ const UsernameForm = () => {
 						<Button
 							color="inherit"
 							className={classes.btn}
-							onClick={() => handleChangeUser(solved, setSolved, setUser)}
+							onClick={() => handleChangeUser(solved, setSolved, setUser, setUsername)}
 						>
 							{user.handle}
 						</Button>
