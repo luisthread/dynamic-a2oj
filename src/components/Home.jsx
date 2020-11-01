@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	root: {
 	  width: '95%',
 	  maxWidth: "960px",
@@ -17,8 +17,12 @@ const useStyles = makeStyles({
 	},
 	button: {
 		margin: "0 .5rem"
+	},
+	link: {
+		textDecoration: 'none',
+		color: theme.palette.common.black
 	}
-  });
+  }));
 
 const Home = () => {
 	const classes = useStyles();
@@ -37,7 +41,7 @@ const Home = () => {
 				<Button className={classes.button} variant="contained" startIcon={<GitHubIcon />} href="https://github.com/luisthread/dynamic-a2oj" target="_blank" rel="noopener">
 					Github
 				</Button>
-				<Link to="/ladders">
+				<Link to="/ladders" className={classes.link}>
 				<Button className={classes.button} variant="contained" endIcon={<ArrowForwardIcon />} color="primary">Get Started</Button></Link>
 			</div>
 		</div>
