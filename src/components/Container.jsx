@@ -69,7 +69,7 @@ const Container = ({ children }) => {
 	return (
 		<Fragment>
 			<div className={classes.root}>
-				<AppBar position="static" color="secondary">
+				<AppBar position="static" color="primary">
 					<Toolbar>
 						<IconButton
 							edge="start"

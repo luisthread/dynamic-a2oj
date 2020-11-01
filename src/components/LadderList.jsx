@@ -21,8 +21,8 @@ const LadderList = () => {
 		<Fragment>
 			<Paper square elevation={3}>
 				<Tabs
-					indicatorColor="secondary"
-					textColor="secondary"
+					indicatorColor="primary"
+					textColor="primary"
 					variant="scrollable"
 					scrollButtons="auto"
 					value={currentTab}

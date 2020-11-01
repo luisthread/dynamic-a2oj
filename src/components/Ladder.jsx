@@ -44,7 +44,7 @@ const Ladder = ({ solved }) => {
 									target="_blank"
 									rel="noopener"
 									className={s[4] ? classes.ac : ''}
-									color="secondary"
+									color="primary"
 									href={`https://codeforces.com/problemset/problem/${s[1]}/${s[2]}`}
 								>
 									{s[0]}
