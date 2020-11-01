@@ -1,5 +1,7 @@
 # Dynamic A2OJ
 
-A A2OJ clone app for upsolving problems made with react.
+A A2OJ ladders app for upsolving problems without any registration.
 
-Visit here [https://a2oj.vercel.app/](https://a2oj.vercel.app/)
+Visit here:
+- [https://a2oj.vercel.app/](https://a2oj.vercel.app/)
+- [https://a2oj.luisthread.engineer/](https://a2oj.luisthread.engineer/)
